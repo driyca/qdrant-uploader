@@ -1,0 +1,19 @@
+[package]
+name = "mongodb-uploader"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.58"
+chicon = "0.1.4"
+log = "0.4.17"
+env_logger = "0.10.0"
+
+clap = { version = "4.1.7", features = ["derive", "color", "suggestions", "env", "unicode"] }
+tokio = { version = "1", default-features=false, features = ["macros", "rt"] }
+
+mongodb = {version = "2.4.0", defauilt-features=false, features = ["tokio-runtime"] }
+serde_json = "1.0.93"
+async-trait = "0.1.65"
