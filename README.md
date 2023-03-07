@@ -1,6 +1,6 @@
 # mongodb-uploader
 
-A system to upload files to MongoDB from local file os s3-like object storage.
+A system to upload JSON or CSV files to MongoDB from local file os s3-like object storage.
 
 ## Usage
 
