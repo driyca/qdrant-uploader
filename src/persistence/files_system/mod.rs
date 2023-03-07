@@ -1,20 +1,44 @@
-use self::{dataset::Dataset, s3::S3Dataset, local::LocalDataset};
+use self::{local_dataset::LocalDataset, s3_dataset::S3Dataset};
 
-mod local;
-mod s3;
+mod dataset_ext;
 mod file_type;
-mod dataset;
+mod local_dataset;
+mod s3_dataset;
 
+use async_trait::async_trait;
 pub use file_type::FileType;
+pub use dataset_ext::DatasetExt;
 
+pub enum Dataset {
+    S3(S3Dataset),
+    Local(LocalDataset),
+}
 
-pub async fn load_dataset<D: Dataset>(source_path: &str, file_type: &FileType) -> anyhow::Result<D> {
-    let dataset: D = 
-        if source_path.starts_with("s3://") {
-            S3Dataset::new(source_path, file_type).await?
+impl Dataset {
+    pub async fn load(source_path: &str, file_type: &FileType, access_key: &str,
+        secret_key: &str, region: &str, endpoint: &str) -> anyhow::Result<Dataset> {
+        let dataset = if source_path.starts_with("s3://") {
+            let dataset = S3Dataset::new(source_path, file_type, access_key,
+                secret_key, region, endpoint).await?;
+            Dataset::S3(dataset)
         } else {
-            LocalDataset::new(source_path, file_type).await?
+            let dataset = LocalDataset::new(source_path, file_type).await?;
+            Dataset::Local(dataset)
         };
 
-    Ok(dataset)
+        Ok(dataset)
+    }
+}
+
+
+#[async_trait]
+impl DatasetExt for Dataset {
+    type DatasetType = Dataset;
+
+    async fn next_line(&self) -> anyhow::Result<Option<serde_json::Value>> {
+        match self {
+            Dataset::S3(dataset) => dataset.next_line().await,
+            Dataset::Local(dataset) => dataset.next_line().await
+        }
+    }
 }

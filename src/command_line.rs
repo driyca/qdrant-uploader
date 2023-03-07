@@ -10,7 +10,7 @@ pub struct CommandLine {
     pub source_path: String,
 
     /// Source file type
-    #[clap(long, default_value = "JSON", env = "SOURCE_FILE_PATH")]
+    #[clap(long, default_value = "json", env = "SOURCE_FILE_PATH")]
     pub source_file_type: FileType,
 
     /// Database connection String
@@ -25,13 +25,17 @@ pub struct CommandLine {
     #[clap(long, env = "DATABASE_COLLECTION")]
     pub database_collection: String,
 
+    /// Database collection
+    #[clap(long, env = "BATCH_SIZE")]
+    pub batch_size: u32,
+
     /// The S3 endpoint to connect and save file
     #[clap(long, default_value="http://minio.storage.svc", env = "S3_ENDPOINT")]
-    pub endpoint: String,
+    pub s3_endpoint: String,
 
     /// S3 Region to connect (blank for minio)
     #[clap(long, default_value="", env = "S3_NEW_PATH_STYLE")]
-    pub region: String,
+    pub s3_region: String,
 
     /// S3 Access key
     #[clap(long, env = "S3_ACCESS_KEY")]

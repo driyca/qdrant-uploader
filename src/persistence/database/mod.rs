@@ -3,8 +3,6 @@ use mongodb::{Collection, Client, Database, options::ClientOptions};
 const APPLICATION_NAME: &str = "mongodb-uploader";
 
 pub struct DatabaseClient {
-    database_name: String,
-    collection_name: String,
     collection: Collection<serde_json::Value>
 }
 
@@ -16,8 +14,6 @@ impl DatabaseClient {
 
         let database_client =
             DatabaseClient {
-                database_name: database_name.to_string(),
-                collection_name: collection_name.to_string(),
                 collection: collection
             };
 

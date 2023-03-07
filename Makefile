@@ -1,4 +1,4 @@
-IMAGE_REPOSITORY=registry.gitlab.com/driyca/mongodb-uploader
+IMAGE_REPOSITORY=docker.io/andreclaudino/mongodb-uploader
 PROJECT_VERSION := $$(cat Cargo.toml | grep version | head -n 1 | awk '{print $3}' | sed -r 's/^"|"$//g')
 IMAGE_NAME=$(IMAGE_REPOSITORY):$(PROJECT_VERSION)
 GIT_REFERENCE := $$(git log -1 --pretty=%h)
@@ -27,7 +27,7 @@ docker/flags/build: docker/flags/create
 
 
 docker/flags/login: docker/flags/create
-	podman login registry.gitlab.com
+	podman login
 	touch docker/flags/login
 
 

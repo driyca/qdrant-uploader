@@ -21,7 +21,7 @@ ARG VERSION
 LABEL "org.opencontainers.image.source"="https://gitlab.com/driyca/awin-feed-downloader"
 LABEL "org.opencontainers.image.revision"="${GIT_REFERENCE}"
 LABEL "org.opencontainers.image.version"="${VERSION}"
-LABEL "com.driyca.entrypoint"="awin-feed-downloader"
+LABEL "com.driyca.entrypoint"="mongodb-uploader"
 LABEL "com.driyca/healthz"="/health"
 
 ENV RUST_LOG=info
@@ -35,6 +35,4 @@ RUN apt-get update && \
 
 COPY --from=builder  /application/bin/* /usr/bin/
 
-ENTRYPOINT [ "awin-feed-downloader" ]
-
-    
+ENTRYPOINT [ "mongodb-uploader" ]
