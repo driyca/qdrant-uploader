@@ -8,6 +8,7 @@ mod s3_dataset;
 use async_trait::async_trait;
 pub use file_type::FileType;
 pub use dataset_ext::DatasetExt;
+use tokio::io::AsyncRead;
 
 pub enum Dataset {
     S3(S3Dataset),
