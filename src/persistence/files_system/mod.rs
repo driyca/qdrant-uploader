@@ -16,8 +16,8 @@ pub enum Dataset {
 }
 
 impl Dataset {
-    pub async fn load(source_path: &str, file_type: &FileType, access_key: &str,
-        secret_key: &str, region: &str, endpoint: &str) -> anyhow::Result<Dataset> {
+    pub async fn load(source_path: &str, file_type: &FileType, access_key: Option<String>,
+        secret_key: Option<String>, region: Option<String>, endpoint: Option<String>) -> anyhow::Result<Dataset> {
         let dataset = if source_path.starts_with("s3://") {
             let dataset = S3Dataset::new(source_path, file_type, access_key,
                 secret_key, region, endpoint).await?;
