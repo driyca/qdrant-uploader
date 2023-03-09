@@ -1,5 +1,5 @@
 IMAGE_REPOSITORY=docker.io/andreclaudino/mongodb-uploader
-PROJECT_VERSION := $$(cat Cargo.toml | grep version | head -n 1 | awk '{print $3}' | sed -r 's/^"|"$//g')
+PROJECT_VERSION := $$(cat Cargo.toml | grep version | head -n 1 | awk '{print $$3}' | sed -r 's/^"|"$$//g')
 IMAGE_NAME=$(IMAGE_REPOSITORY):$(PROJECT_VERSION)
 GIT_REFERENCE := $$(git log -1 --pretty=%h)
 
@@ -36,7 +36,7 @@ docker/flags/tag: docker/flags/build
 	touch docker/flags/tag
 
 
-docker/flags/push: docker/flags/login docker/flags/build
+docker/flags/push: docker/flags/login docker/flags/tag
 	podman push $(IMAGE_REPOSITORY):latest
 	podman push $(IMAGE_NAME)
 
