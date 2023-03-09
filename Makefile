@@ -27,7 +27,7 @@ docker/flags/build: docker/flags/create
 
 
 docker/flags/login: docker/flags/create
-	podman login
+	podman login docker.io
 	touch docker/flags/login
 
 
