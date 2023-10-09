@@ -4,7 +4,6 @@ A system to upload JSON or CSV files to Qdrant from local file os s3-like object
 
 ## Usage
 
-
 ```
 $> mongodb-uploader --help
 
@@ -16,9 +15,11 @@ Options:
       --source-file-type <SOURCE_FILE_TYPE>
           Source file type [env: SOURCE_FILE_TYPE=] [default: json] [possible values: json, csv]
       --connection-string <CONNECTION_STRING>
-          Database connection String [env: CONNECTION_STRING=]
+          QDrant connection String [env: CONNECTION_STRING=]
+      --api-key <API_KEY>
+          Qdrant connection String [env: DATABASE_API_KEY=]
       --database-collection <DATABASE_COLLECTION>
-          Database collection [env: DATABASE_COLLECTION=]
+          Qdrant collection [env: DATABASE_COLLECTION=]
       --id-field-name <ID_FIELD_NAME>
           Field to be used as Qdrant point id
       --vector-field-name <VECTOR_FIELD_NAME>...
@@ -44,7 +45,7 @@ Options:
   -h, --help
           Print help
   -V, --version
-          Print versio
+          Print version
 ```
 
 ## Docker image
@@ -55,3 +56,5 @@ Current available tags are:
 
 * latest
 * 0.1.0
+* 0.2.0
+

@@ -16,7 +16,7 @@ async fn main() -> anyhow::Result<()> {
     let vector_fields = arguments.load_vector_field_name()?;
     
     let database_client =
-        DatabaseClient::new(&arguments.connection_string, &arguments.database_collection,
+        DatabaseClient::new(&arguments.connection_string, &arguments.api_key, &arguments.database_collection,
             arguments.id_field_name.clone(), vector_fields,
             payload_fields, arguments.chunk_size,
         ).await?;

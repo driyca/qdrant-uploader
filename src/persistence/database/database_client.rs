@@ -20,10 +20,10 @@ pub struct DatabaseClient {
 
 impl DatabaseClient {
 
-    pub async fn new(connection_string: &str, collection_name: &str, id_field_name: Option<String>, vector_field: FieldName,
+    pub async fn new(connection_string: &str, api_key: &Option<String>, collection_name: &str, id_field_name: Option<String>, vector_field: FieldName,
             payload_field: Option<FieldName>, chunk_size: usize) -> anyhow::Result<DatabaseClient> {
                 
-        let client = QdrantClient::from_url(connection_string).build()?;
+        let client = QdrantClient::from_url(connection_string).with_api_key(api_key.to_owned()).build()?;
         let arc_client = Arc::new(client);
         
         let database_client = DatabaseClient{

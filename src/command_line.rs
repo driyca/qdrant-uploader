@@ -12,11 +12,15 @@ pub struct CommandLine {
     #[clap(long, default_value = "json", env = "SOURCE_FILE_TYPE")]
     pub source_file_type: FileType,
 
-    /// Database connection String
+    /// QDrant connection String
     #[clap(long, env = "CONNECTION_STRING")]
     pub connection_string: String,
 
-    /// Database collection
+    /// Qdrant connection String
+    #[clap(long, env = "DATABASE_API_KEY")]
+    pub api_key: Option<String>,
+
+    /// Qdrant collection
     #[clap(long, env = "DATABASE_COLLECTION")]
     pub database_collection: String,
 
